@@ -51,7 +51,7 @@ func main() {
 	// mapping of go packages of this module to the resulting java package
 	// optional ApiGroup and ApiVersion for the go package (which is added to the generated java class)
 	packageMapping := map[string]schemagen.PackageInformation{
-		"volcano-sh/apis/pkg/apis/scheduling/v1beta1": {JavaPackage: "io.fabric8.volcano.scheduling.v1beta1", ApiGroup: "scheduling.k8s.io", ApiVersion: "v1beta1"},
+		"volcano.sh/apis/pkg/apis/scheduling/v1beta1": {JavaPackage: "io.fabric8.volcano.scheduling.v1beta1", ApiGroup: "scheduling.k8s.io", ApiVersion: "v1beta1"},
 	}
 
 	// converts all packages starting with <key> to a java package using an automated scheme:
