@@ -15,15 +15,15 @@
  */
 package io.fabric8.volcano.client;
 
-import io.fabric8.kubernetes.client.BaseClient;
-import io.fabric8.kubernetes.client.Config;
-import io.fabric8.kubernetes.client.Handlers;
-import io.fabric8.kubernetes.client.RequestConfig;
+import io.fabric8.kubernetes.client.*;
 import io.fabric8.kubernetes.client.dsl.FunctionCallable;
 import io.fabric8.kubernetes.client.dsl.MixedOperation;
 import io.fabric8.kubernetes.client.dsl.Resource;
+import io.fabric8.volcano.client.dsl.V1beta1APIGroupDSL;
 import io.fabric8.volcano.scheduling.v1beta1.PodGroup;
 import io.fabric8.volcano.scheduling.v1beta1.PodGroupList;
+import io.fabric8.volcano.scheduling.v1beta1.Queue;
+import io.fabric8.volcano.scheduling.v1beta1.QueueList;
 import okhttp3.OkHttpClient;
 
 public class DefaultVolcanoClient extends BaseClient implements NamespacedVolcanoClient {
@@ -42,21 +42,38 @@ public class DefaultVolcanoClient extends BaseClient implements NamespacedVolcan
 
   @Override
   public NamespacedVolcanoClient inAnyNamespace() {
-    return null;
+    return inNamespace(null);
   }
 
   @Override
-  public NamespacedVolcanoClient inNamespace(String name) {
-    return null;
+  public NamespacedVolcanoClient inNamespace(String namespace) {
+    Config updated = new ConfigBuilder(getConfiguration())
+      .withNamespace(namespace)
+      .build();
+    return new DefaultVolcanoClient(getHttpClient(), updated);
   }
 
   @Override
   public FunctionCallable<NamespacedVolcanoClient> withRequestConfig(RequestConfig requestConfig) {
-    return null;
+    return new WithRequestCallable<>(this, requestConfig);
   }
 
   @Override
   public MixedOperation<PodGroup, PodGroupList, Resource<PodGroup>> PodGroups() {
+    // By default, client.PodGroups() use v1beta1 version,
     return Handlers.getOperation(PodGroup.class, PodGroupList.class, this.getHttpClient(), this.getConfiguration());
+  }
+
+  @Override
+  public MixedOperation<Queue, QueueList, Resource<Queue>> Queues() {
+    // By default, client.PodGroups() use v1beta1 version,
+    return Handlers.getOperation(Queue.class, QueueList.class, this.getHttpClient(), this.getConfiguration());
+  }
+
+
+  @Override
+  public V1beta1APIGroupDSL v1beta1() {
+    // User can specify client.v1beta1().PodGroups() to use v1beta1 API
+    return adapt(V1beta1APIGroupClient.class);
   }
 }

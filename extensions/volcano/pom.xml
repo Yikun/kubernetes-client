@@ -12,7 +12,7 @@
   <name>Fabric8 :: Volcano :: Extension</name>
 
   <modules>
-    <module>model</module>
+    <module>model-v1beta1</module>
     <module>client</module>
     <module>examples</module>
     <module>mock</module>

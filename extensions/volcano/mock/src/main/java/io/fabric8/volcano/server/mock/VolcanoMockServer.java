@@ -34,6 +34,8 @@ import static okhttp3.TlsVersion.TLS_1_2;
 
 public class VolcanoMockServer extends KubernetesMockServer {
 
+  private boolean disableApiGroupCheck = true;
+
   public VolcanoMockServer() {
     super();
   }
@@ -48,7 +50,7 @@ public class VolcanoMockServer extends KubernetesMockServer {
 
   @Override
   public String[] getRootPaths() {
-    return new String[]{"/api", "/apis/volcano.sh"};
+    return new String[]{"/api", "/apis/scheduling.k8s.io/v1beta1"};
   }
 
   public NamespacedVolcanoClient createVolcano() {

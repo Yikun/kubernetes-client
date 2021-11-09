@@ -26,14 +26,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableVolcanoMockClient(crud = true)
 class VolcanoTest {
+    VolcanoClient client;
 
-  VolcanoClient client;
   @Test
   void testPodGroup() {
-    PodGroup podGroup = new PodGroupBuilder().build();
-    client.PodGroups().create(podGroup);
+    PodGroup podGroup = new PodGroupBuilder()
+      .withNewMetadata()
+        .withName("Pod")
+        .endMetadata()
+      .build();
+    client.PodGroups().inNamespace("ns1").create(podGroup);
 
-    PodGroupList podGroupList = client.PodGroups().list();
+    PodGroupList podGroupList = client.PodGroups().inNamespace("ns1").list();
+    assertNotNull(podGroupList);
+    assertEquals(1, podGroupList.getItems().size());
+  }
+
+  @Test
+  void testV1Beta1PodGroup() {
+    PodGroup podGroup = new PodGroupBuilder()
+      .withNewMetadata()
+      .withName("Pod")
+      .endMetadata()
+      .build();
+    client.PodGroups().inNamespace("ns1").create(podGroup);
+
+    PodGroupList podGroupList = client.v1beta1().PodGroups().inNamespace("ns1").list();
     assertNotNull(podGroupList);
     assertEquals(1, podGroupList.getItems().size());
   }

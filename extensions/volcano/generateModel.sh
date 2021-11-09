@@ -1,4 +1,4 @@
-declare -a modules=("generator")
+declare -a modules=("generator-v1beta1")
 
 for module in ${modules[*]}
 do

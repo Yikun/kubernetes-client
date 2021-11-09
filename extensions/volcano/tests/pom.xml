@@ -62,7 +62,7 @@
     </dependency>
     <dependency>
       <groupId>io.fabric8</groupId>
-      <artifactId>volcano-model</artifactId>
+      <artifactId>volcano-model-v1beta1</artifactId>
       <version>5.10-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
