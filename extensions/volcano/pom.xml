@@ -7,16 +7,16 @@
     <version>5.10-SNAPSHOT</version>
   </parent>
 
-  <artifactId>volcano</artifactId>
+  <artifactId>volcano-extension-pom</artifactId>
   <packaging>pom</packaging>
   <name>Fabric8 :: Volcano :: Extension</name>
 
   <modules>
     <module>model</module>
-    <!-- <module>client</module>
-    <module>mock</module>
+    <module>client</module>
     <module>examples</module>
-    <module>tests</module> -->
+    <module>mock</module>
+    <module>tests</module>
   </modules>
 
 </project>
