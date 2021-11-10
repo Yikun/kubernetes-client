@@ -19,10 +19,10 @@ SHELL := /bin/bash
 all: build
 
 build: gobuild
-	pushd ../model && \
+	pushd ../model-v1beta1 && \
 	mvn clean install -o && \
   popd
 
 gobuild:
 	go mod vendor
-	CGO_ENABLED=0 GO111MODULE=on GO15VENDOREXPERIMENT=1 go run -mod=vendor -a ./cmd/generate/generate.go > ../model/src/main/resources/schema/volcano-schema.json
+	CGO_ENABLED=0 GO111MODULE=on GO15VENDOREXPERIMENT=1 go run -mod=vendor -a ./cmd/generate/generate.go > ../model-v1beta1/src/main/resources/schema/volcano-schema.json

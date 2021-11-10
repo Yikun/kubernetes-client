@@ -7,7 +7,7 @@
       "properties": {
         "apiVersion": {
           "type": "string",
-          "default": "scheduling.k8s.io/v1beta1",
+          "default": "scheduling.volcano.sh/v1beta1",
           "required": true
         },
         "kind": {
@@ -65,7 +65,7 @@
       "properties": {
         "apiVersion": {
           "type": "string",
-          "default": "scheduling.k8s.io/v1beta1",
+          "default": "scheduling.volcano.sh/v1beta1",
           "required": true
         },
         "items": {
@@ -146,7 +146,7 @@
       "properties": {
         "apiVersion": {
           "type": "string",
-          "default": "scheduling.k8s.io/v1beta1",
+          "default": "scheduling.volcano.sh/v1beta1",
           "required": true
         },
         "kind": {
@@ -177,7 +177,7 @@
       "properties": {
         "apiVersion": {
           "type": "string",
-          "default": "scheduling.k8s.io/v1beta1",
+          "default": "scheduling.volcano.sh/v1beta1",
           "required": true
         },
         "items": {
